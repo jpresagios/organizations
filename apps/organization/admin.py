@@ -7,3 +7,10 @@ from .models import Organization, OrganizationMember
 class OrganizationAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'address')
     search_fields = ['name', 'phone']
+
+
+
+@admin.register(OrganizationMember)
+class OrganizationMemberAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'organization', 'birthdate')
+    search_fields = ['name', 'phone']

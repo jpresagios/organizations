@@ -1,0 +1,2 @@
+DJANGO_SETTINGS_MODULE=config.settings.development
+DJANGO_SECRET_KEY=#aDAIv[}A~w;mo^qfqnM#FKP@]|7sl_3-^,T.u,Z?s3N~ti)@p

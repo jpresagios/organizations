@@ -1,5 +1,8 @@
 Django==3.1.7
+
+# DRF
 djangorestframework==3.12.2
+djangorestframework-jwt==1.11.0
 
 # Configuration
 django-environ==0.4.5

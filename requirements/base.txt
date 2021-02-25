@@ -7,3 +7,6 @@ djangorestframework-jwt==1.11.0
 
 # Configuration
 django-environ==0.4.5
+
+# API Documentation
+drf-yasg==1.20.0

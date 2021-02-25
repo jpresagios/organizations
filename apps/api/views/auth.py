@@ -6,6 +6,7 @@ from api.serializers import AuthSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth.models import Group
+from drf_yasg.utils import swagger_auto_schema
 
 
 class GroupList(generics.ListAPIView):
@@ -15,9 +16,9 @@ class GroupList(generics.ListAPIView):
 
 
 class ObtainAuthToken(APIView):
-
     permission_classes = ()
 
+    @swagger_auto_schema(request_body=AuthSerializer, responses={200: "token"})
     def post(self, request):
         serializer = AuthSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

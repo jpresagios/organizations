@@ -9,7 +9,6 @@ class OrganizationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'phone']
 
 
-
 @admin.register(OrganizationMember)
 class OrganizationMemberAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'organization', 'birthdate')

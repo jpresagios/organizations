@@ -4,6 +4,7 @@
 *.pyc
 __pycache__
 db.sqlite3
+*.db
 media
 
 # Backup files # 
@@ -106,6 +107,10 @@ Control.ca-list
 Control.ca-bundle 
 Control.system-ca-bundle 
 GitHub.sublime-settings 
+
+# Django stuff:
+staticfiles/
+
 
 # Visual Studio Code # 
 .vscode/* 

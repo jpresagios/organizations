@@ -53,3 +53,10 @@ python manage.py migrate
 python manage.py collectstatic
 python manage.py runserver
 ```
+
+## How review API contracts documentation
+
+```
+python manage.py runserver
+Navigate to /swagger
+```

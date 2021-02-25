@@ -1,6 +1,6 @@
 # Organizations API
 
-To have installed:
+## To have installed:
 
 - Python 3.X
 
@@ -8,27 +8,27 @@ To have installed:
   https://www.python.org/downloads/
   ```
 
-Install requirements
+## Install requirements
 
 Create a Python Virtual enviroment, and change to the directory
 requirements
 
-Install development requirements
+For only development dependencies
 
 ```
 pip install -r development.txt
 ```
 
-Install prod requirements
+For only production dependencies (In this case dependecies like django-debug-toolbar don't be installed)
 
 ```
 pip install -r production.txt
 ```
 
-```
-Enviroment
+## Enviroment
 
-To create .env, please use  envsample content and change for your own
+```
+Create .env, please use  envsample content and change for your own
 ```
 
 The variable DJANGO_SETTINGS_MODULE in .env defined the enviroment to run
@@ -46,7 +46,7 @@ For production
 DJANGO_SETTINGS_MODULE=config.settings.production
 ```
 
-How to run app
+## How to run app
 
 ```
 python manage.py migrate

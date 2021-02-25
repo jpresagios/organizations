@@ -1,6 +1,7 @@
 from django.urls import path
-from .views.auth import ObtainAuthToken
+from .views.auth import ObtainAuthToken, GroupList
 
 urlpatterns = [
     path('auth/login/', ObtainAuthToken.as_view()),
+    path('auth/groups/', GroupList.as_view()),
 ]

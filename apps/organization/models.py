@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 User._meta.get_field('email')._unique = True
 
+
 class Organization(models.Model):
     name = models.CharField(_("Name"), max_length=100)
     phone = models.CharField(_("Phone"), max_length=20)
@@ -18,7 +19,7 @@ class OrganizationMember(models.Model):
     Represent a User that belong to an Organization
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization_member')
     name = models.CharField(_("Name"), max_length=100)
     phone = models.CharField(_("Phone"), max_length=20)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='members')

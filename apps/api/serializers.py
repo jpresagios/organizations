@@ -4,6 +4,22 @@ from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
+from organization.models import Organization, OrganizationMember
+
+
+class OrganizationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Organization
+
+
+class OrganizationMemberSerializer(serializers.ModelSerializer):
+    organization = OrganizationSerializer()
+
+    class Meta:
+        fields = '__all__'
+        model = OrganizationMember
 
 
 class GroupSerializer(serializers.ModelSerializer):

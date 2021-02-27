@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
-from api.serializers import OrganizationMemberSerializer
+from api.serializers import OrganizationMemberSerializer, UserOrganizationSerializer
 from rest_framework.response import Response
 from rest_framework import generics
 from django.contrib.auth.models import Group
@@ -23,3 +23,8 @@ class UserByOrganizationList(generics.ListAPIView):
         organization = user.organization_member.organization
 
         return organization.members
+
+
+class UserDetail(generics.RetrieveAPIView):
+    serializer_class = UserOrganizationSerializer
+    queryset = OrganizationMember.objects.all()

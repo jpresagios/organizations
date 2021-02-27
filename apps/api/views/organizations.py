@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from rest_framework import status
 
 
-class OrganizationDetail(APIView):
+class OrganizationRetrieveUpdateAPI(APIView):
     permission_classes = (IsAdministratorOrViewer,)
 
     def get_object(self, pk):

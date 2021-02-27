@@ -18,3 +18,16 @@ class OrganizationDetail(APIView):
         organization = self.get_object(pk)
         serializer = OrganizationSerializer(organization)
         return Response(serializer.data)
+
+    def patch(self, request, pk):
+        testmodel_object = self.get_object(pk)
+
+        serializer = OrganizationSerializer(
+            testmodel_object,
+            data=request.data,
+            partial=True)  # set partial=True to update a data partially
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

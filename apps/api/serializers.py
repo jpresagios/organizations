@@ -8,7 +8,6 @@ from organization.models import Organization, OrganizationMember
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = '__all__'
         model = Organization
@@ -53,3 +52,22 @@ class AuthSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class UserOrganizationSerializer(serializers.ModelSerializer):
+    organization_name = serializers.SerializerMethodField()
+    organization_id = serializers.SerializerMethodField()
+    email = serializers.SerializerMethodField()
+
+    def get_organization_name(self, obj):
+        return obj.organization.name
+
+    def get_organization_id(self, obj):
+        return obj.organization.pk
+
+    def get_email(self, obj):
+        return obj.user.email
+
+    class Meta:
+        fields = ('name', 'phone', 'birthdate', 'email', 'organization_name', 'organization_id')
+        model = OrganizationMember

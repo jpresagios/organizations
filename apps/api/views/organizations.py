@@ -2,15 +2,16 @@ from api.serializers.organizations import OrganizationSerializer
 from api.serializers.users import UserSerializer
 from rest_framework import generics
 from organization.models import Organization
-from api.permissions import IsAdministratorOrViewer
+from api.permissions import IsAdministratorOrViewer, IsAdministratorOrViewerForGET, IsAdministratorForPatch
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from rest_framework import status
+from rest_condition import Or
 
 
 class OrganizationRetrieveUpdateAPI(APIView):
-    permission_classes = (IsAdministratorOrViewer,)
+    permission_classes = (Or(IsAdministratorOrViewerForGET, IsAdministratorForPatch),)
 
     def get_object(self, pk):
         return Organization.objects.get(pk=pk)

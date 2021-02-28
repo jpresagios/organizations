@@ -87,11 +87,13 @@ Navigate to /swagger
 python manage.py test api
 ```
 
-Automation Build With Docker
+## Automation Build With Docker
 Have docker and docker-compose in your computer
 
 https://docs.docker.com/compose/install/
+```
 docker-compose up --build
+```
 
 Docker start up process run everything to get the app ready to used. In
 addition **initial_data** run to have some demo data for the purposes

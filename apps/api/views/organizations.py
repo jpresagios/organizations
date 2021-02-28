@@ -1,4 +1,5 @@
 from api.serializers.organizations import OrganizationSerializer
+from api.serializers.users import UserSerializer
 from rest_framework import generics
 from organization.models import Organization
 from api.permissions import IsAdministratorOrViewer
@@ -31,3 +32,17 @@ class OrganizationRetrieveUpdateAPI(APIView):
             serializer.save()
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class OrganizationMemberList(APIView):
+    permission_classes = (IsAdministratorOrViewer,)
+
+    def get_object(self, pk):
+        return Organization.objects.get(pk=pk)
+
+    def get(self, request, pk, format=None):
+        organization = self.get_object(pk)
+        members = organization.members
+
+        serializer = UserSerializer(members, many=True)
+        return Response(serializer.data)

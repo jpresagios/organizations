@@ -93,8 +93,18 @@ Have docker and docker-compose in your computer
 https://docs.docker.com/compose/install/
 ```
 docker-compose up --build
+
+The api is expose in http://localhost:8001/api
+Navigate to http://localhost:8001/swagger/ to test everything work fine.
 ```
+
 
 Docker start up process run everything to get the app ready to used. In
 addition **initial_data** run to have some demo data for the purposes
 of simple review this Task.
+
+## Possible improvements
+- Included an nginx to server the project, actually is running
+using the develop django server inside Docker
+
+- Covered with more tests the API, not everything was tested 

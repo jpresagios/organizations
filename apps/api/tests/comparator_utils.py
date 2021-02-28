@@ -25,3 +25,9 @@ def comparator_organization_members(organization, list_members_response):
     # Every member response is in Organization and every member from Organization in response
     # => then response contains exactly every member Organization
     return True
+
+
+def comparator_member(member_model, member_dict):
+    return member_model.name == member_dict['name'] and \
+           member_model.phone == member_dict['phone'] and \
+           member_model.organization.name == member_dict['organization_name']

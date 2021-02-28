@@ -9,7 +9,7 @@ urlpatterns = [
     path('auth/groups/', GroupList.as_view(), name='auth_groups'),
 
     path('users/', UserByOrganizationList.as_view(), name='user_organization_members'),
-    path('users/<int:pk>/', UserGetRetrieveDestroyUpdate.as_view()),
+    path('users/<int:pk>/', UserGetRetrieveDestroyUpdate.as_view(), name="user_get_retrieve_destroy_update"),
 
     path('organizations/<int:pk>/', OrganizationRetrieveUpdateAPI.as_view(), name="organization_retrieve_update"),
     path('organization/<int:pk>/users/', OrganizationMemberList.as_view(), name="organization_members"),

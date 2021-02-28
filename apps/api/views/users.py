@@ -10,11 +10,11 @@ from api.permissions import IsAdministratorOrViewer, AllowAnyForGET, IsAdminOrSa
     isAdminForDELETE
 from rest_framework.exceptions import NotFound
 
+import datetime
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_condition import Or
-import datetime
-
+from api.views.search_util import get_search_conditions
 
 class UserListCreate(APIView):
     permission_classes = (IsAdministratorOrViewer,)
@@ -28,6 +28,15 @@ class UserListCreate(APIView):
         user = self.request.user
 
         organization = user.organization_member.organization
+
+        query_search = get_search_conditions(self.request)
+        
+        if query_search:
+            print(query_search)
+            filtered = organization.members.filter(query_search)
+            serializer = OrganizationMemberSerializer(filtered, many=True)
+            return Response(serializer.data)
+        
 
         serializer = OrganizationMemberSerializer(organization.members, many=True)
         return Response(serializer.data)

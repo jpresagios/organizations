@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework.permissions import AllowAny
 
-from api.serializers.users import OrganizationMemberSerializer, UserOrganizationSerializer
+from api.serializers.users import OrganizationMemberSerializer, UserOrganizationSerializer, \
+    UserCreateSerializer
 from rest_framework.response import Response
 from rest_framework import generics
 from organization.models import OrganizationMember
@@ -12,13 +13,13 @@ from rest_framework.exceptions import NotFound
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_condition import Or
+import datetime
 
 
-class UserByOrganizationList(generics.ListAPIView):
+class UserListCreate(APIView):
     permission_classes = (IsAdministratorOrViewer,)
-    serializer_class = OrganizationMemberSerializer
 
-    def get_queryset(self):
+    def get(self, request):
         """
         List all the users for the user organization if user is `Administrator` or
         `Viewer`. Must return all the user model fields. Should support search by name, email.
@@ -28,7 +29,26 @@ class UserByOrganizationList(generics.ListAPIView):
 
         organization = user.organization_member.organization
 
-        return organization.members
+        serializer = OrganizationMemberSerializer(organization.members, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        user = request.user
+
+        serializer = UserCreateSerializer(data=request.data)
+
+        if serializer.is_valid():
+            email = request.data['email']
+            password = request.data['password']
+
+            new_user = User.objects.create_superuser(email, email, password)
+            serializer.save(
+                user=new_user,
+                organization=user.organization_member.organization,
+                birthdate=datetime.datetime.now())
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserGetRetrieveDestroyUpdate(APIView):

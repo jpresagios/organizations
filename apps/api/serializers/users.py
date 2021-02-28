@@ -72,3 +72,22 @@ class UserOrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('name', 'phone', 'birthdate', 'email', 'organization_name', 'organization_id')
         model = OrganizationMember
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+
+    # def create(self, validated_data):
+
+    #     request = self.context.get("request")
+
+    #     print(request.user)
+
+    #     password = validated_data.pop('password', None)
+    #     instance = super().create(validated_data)
+    #     instance.save()
+
+    #     return instance
+
+    class Meta:
+        model = OrganizationMember
+        fields = ('name', 'phone')

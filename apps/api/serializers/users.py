@@ -16,6 +16,12 @@ class OrganizationMemberSerializer(serializers.ModelSerializer):
         model = OrganizationMember
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('pk', 'name')
+        model = OrganizationMember
+
+
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('name', )

@@ -11,7 +11,7 @@ from .tokens import get_token
 from .comparator_utils import comparator_organization, comparator_organization_members
 
 
-class UserTests(APITestCase):
+class OrganizationTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
         generate_all()

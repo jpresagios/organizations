@@ -60,3 +60,9 @@ python manage.py runserver
 python manage.py runserver
 Navigate to /swagger
 ```
+
+## How run tests
+
+```
+python manage.py test api
+```

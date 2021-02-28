@@ -1,7 +1,8 @@
 from django.urls import path
 from .views.auth import ObtainAuthToken, GroupList
 from .views.users import UserByOrganizationList, UserDetail
-from .views.organizations import OrganizationRetrieveUpdateAPI, OrganizationMemberList
+from .views.organizations import OrganizationRetrieveUpdateAPI, OrganizationMemberList, \
+        OrganizationMemberDetail
 
 urlpatterns = [
     path('auth/login/', ObtainAuthToken.as_view(), name="login"),
@@ -11,6 +12,7 @@ urlpatterns = [
     path('users/<int:pk>/', UserDetail.as_view()),
 
     path('organizations/<int:pk>/', OrganizationRetrieveUpdateAPI.as_view(), name="organization_retrieve_update"),
-    path('organization/<int:pk>/users', OrganizationMemberList.as_view(), name="organization_members"),
+    path('organization/<int:pk>/users/', OrganizationMemberList.as_view(), name="organization_members"),
+    path('organization/<int:pk>/users/<int:member_id>/', OrganizationMemberDetail.as_view(), name="organization_members"),
 
 ]

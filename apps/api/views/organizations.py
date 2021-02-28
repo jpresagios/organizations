@@ -1,7 +1,8 @@
 from api.serializers.organizations import OrganizationSerializer
 from api.serializers.users import UserSerializer
 from rest_framework import generics
-from organization.models import Organization
+from django.contrib.auth.models import User
+from organization.models import Organization, OrganizationMember
 from api.permissions import IsAdministratorOrViewer, IsAdministratorOrViewerForGET, IsAdministratorForPatch
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -46,4 +47,25 @@ class OrganizationMemberList(APIView):
         members = organization.members
 
         serializer = UserSerializer(members, many=True)
+        return Response(serializer.data)
+
+
+class OrganizationMemberDetail(APIView):
+    permission_classes = (IsAdministratorOrViewer,)
+
+    def get(self, request, pk, member_id, format=None):
+
+        organization = Organization.objects.filter(pk=pk).first()
+        member = OrganizationMember.objects.filter(
+            organization=organization, pk=member_id).first()
+
+        if not organization:
+            return Response({'error': 'Organization not found'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        if not member:
+            return Response({'error': 'User not found'},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = UserSerializer(member)
         return Response(serializer.data)

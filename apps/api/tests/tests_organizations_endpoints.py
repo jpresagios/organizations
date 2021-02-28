@@ -95,3 +95,45 @@ class UserTests(APITestCase):
                                         format='json')
 
             self.assertEqual(response.status_code, 403)
+
+
+    def test_organization_patch(self):
+        """
+        PATCH /api/organizations/{id} Update organization if request user is `Administrator`.
+        """
+        
+        user = User.objects.filter(groups__name='Administrator').first()
+        token = get_token(user)
+        
+        for organization in Organization.objects.all():
+            url_patch_organization = reverse('organization_retrieve_update', args=[organization.pk])
+            
+            patch_name = f"{organization.name}-newname"
+            response = self.client.patch(url_patch_organization, 
+                                        data = {'name': patch_name},
+                                        HTTP_AUTHORIZATION=f"JWT {token}", 
+                                        format='json')
+
+            self.assertEqual(response.status_code, 201)
+            self.assertEqual(response.data['name'], patch_name)
+
+
+    def test_organization_patch_not_admin(self):
+        """
+        PATCH /api/organizations/{id} Update organization if request user is not `Administrator` 
+        should return 403
+        """
+        
+        user = User.objects.filter(~Q(groups__name='Administrator')).first()
+        token = get_token(user)
+        
+        for organization in Organization.objects.all():
+            url_patch_organization = reverse('organization_retrieve_update', args=[organization.pk])
+            
+            patch_name = f"{organization.name}-newname"
+            response = self.client.patch(url_patch_organization, 
+                                        data = {'name': patch_name},
+                                        HTTP_AUTHORIZATION=f"JWT {token}", 
+                                        format='json')
+                                        
+            self.assertEqual(response.status_code, 403)

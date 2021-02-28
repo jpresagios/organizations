@@ -10,3 +10,6 @@ django-environ==0.4.5
 
 # API Documentation
 drf-yasg==1.20.0
+
+# Fake data
+Faker==6.5.0

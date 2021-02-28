@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from organization.models import OrganizationMember
 from api.permissions import IsAdministratorOrViewer, AllowAnyForGET, IsAdminOrSameRequestUserForPATCH, \
-    isAdminForDELETE
+    isAdminForDELETE, IsAdministratorForPOST, IsAdministratorOrViewerForGET
 from rest_framework.exceptions import NotFound
 
 import datetime
@@ -16,8 +16,9 @@ from rest_framework.views import APIView
 from rest_condition import Or
 from api.views.search_util import get_search_conditions
 
+
 class UserListCreate(APIView):
-    permission_classes = (IsAdministratorOrViewer,)
+    permission_classes = (Or(IsAdministratorOrViewerForGET, IsAdministratorForPOST),)
 
     def get(self, request):
         """
@@ -30,13 +31,11 @@ class UserListCreate(APIView):
         organization = user.organization_member.organization
 
         query_search = get_search_conditions(self.request)
-        
+
         if query_search:
-            print(query_search)
             filtered = organization.members.filter(query_search)
             serializer = OrganizationMemberSerializer(filtered, many=True)
             return Response(serializer.data)
-        
 
         serializer = OrganizationMemberSerializer(organization.members, many=True)
         return Response(serializer.data)

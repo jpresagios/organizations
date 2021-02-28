@@ -1,3 +1,7 @@
+# This file contains fake data for testing purpose and for
+# initial database population
+
+
 from faker import Faker
 from django.contrib.auth.models import User, Group
 from organization.models import OrganizationMember, Organization

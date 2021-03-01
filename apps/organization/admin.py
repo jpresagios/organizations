@@ -11,5 +11,5 @@ class OrganizationAdmin(admin.ModelAdmin):
 
 @admin.register(OrganizationMember)
 class OrganizationMemberAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'phone', 'organization', 'birthdate')
+    list_display = ('pk', 'name', 'user', 'phone', 'organization', 'birthdate')
     search_fields = ['name', 'phone']

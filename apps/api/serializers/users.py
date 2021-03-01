@@ -97,4 +97,4 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OrganizationMember
-        fields = ('name', 'phone')
+        fields = ('name', 'phone', 'birthdate')

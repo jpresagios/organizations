@@ -56,14 +56,17 @@ python manage.py runserver
 
 ## Fixtures / Population initial data
 
-This create initial auth groups Administrator, Viewer, User
-Different organizations and users
-At least one known user to test the API that you can used after this command executed is
+This create initial auth groups **Administrator**, **Viewer**, **User**,
+Organizations and Users Organizations (Members).<br>
+One default user to test the API is
+
+```
 email = admin@admin.com
 password = admin123
 group = Administrator
+```
 
-For inserted additional data navigate to Django Admin
+For inserted additional data navigate to Django Admin. Model Organization, OrganizationMember (Reporesent the User Model) are register in Django Admin.
 
 ```
 python manage.py initial_data

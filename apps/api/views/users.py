@@ -52,8 +52,7 @@ class UserListCreate(APIView):
             new_user = User.objects.create_superuser(email, email, password)
             serializer.save(
                 user=new_user,
-                organization=user.organization_member.organization,
-                birthdate=datetime.datetime.now())
+                organization=user.organization_member.organization)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

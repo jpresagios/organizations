@@ -90,8 +90,4 @@ python manage.py test api
 Change the .env variable for your database, this project was tested so far
 with sqlite and Postgresql.
 
-You can use the variable **DATABASE_URL** in the .env
-to specify the database, by default envsample sample is
-DATABASE_URL=sqlite:///db.organization.db
-but you can used PostgreSQL if you installed it in your machine,
-sample database url for PostgreSQL postgres://<youruser>:<yourpassword>@localhost/db_organizations
+You can use the variable **DATABASE_URL** to specify datbase engine.

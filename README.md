@@ -54,6 +54,20 @@ python manage.py collectstatic
 python manage.py runserver
 ```
 
+## Fixtures / Population initial data
+
+This create initial auth groups Administrator, Viewer, User
+Different organizations and users
+At least one known user to test the API that you can used after this command executed is
+email = admin@admin.com
+password = admin123
+
+For inserted additional data navigate to Django Admin
+
+```
+python manage.py initial_data
+```
+
 ## How review API contracts documentation
 
 ```

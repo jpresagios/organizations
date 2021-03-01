@@ -61,6 +61,7 @@ Different organizations and users
 At least one known user to test the API that you can used after this command executed is
 email = admin@admin.com
 password = admin123
+group = Administrator
 
 For inserted additional data navigate to Django Admin
 

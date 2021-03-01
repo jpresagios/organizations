@@ -26,6 +26,10 @@ def add_user_to_group(user, group_name=None):
 def gen_users(numbers=10):
     user_list = []
 
+    # At least one known user
+    user = User.objects.create_superuser("admin@admin.com", "admin@admin.com", 'admin123')
+    add_user_to_group(user, 'Administrator')
+
     # Should be at less 3 user in each auth group
     groups = get_auth_groups()
 

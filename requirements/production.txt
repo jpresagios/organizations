@@ -6,3 +6,6 @@
 # WSGI Handler
 # ------------------------------------------------
 gunicorn==20.0.4
+
+# WhiteNoise for serving static files
+whitenoise==5.2.0

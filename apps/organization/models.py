@@ -21,7 +21,7 @@ class OrganizationMember(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='organization_member')
     name = models.CharField(_("Name"), max_length=100)
-    phone = models.CharField(_("Phone"), max_length=20)
+    phone = models.CharField(_("Phone"), max_length=50)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='members')
     birthdate = models.DateField(_('Birthdate'))
 

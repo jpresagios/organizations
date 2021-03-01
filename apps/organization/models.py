@@ -7,7 +7,7 @@ User._meta.get_field('email')._unique = True
 
 class Organization(models.Model):
     name = models.CharField(_("Name"), max_length=100)
-    phone = models.CharField(_("Phone"), max_length=20)
+    phone = models.CharField(_("Phone"), max_length=50)
     address = models.TextField(_("Address"))
 
     def __str__(self):
